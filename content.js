@@ -11,9 +11,6 @@ function createIframe() {
   customIframe.src = 'https://www.google.com/search?igu=1';
   customIframe.width = '500';
   customIframe.height = '300';
-  customIframe.sandbox =
-    'allow-scripts allow-same-origin+allow-forms allow-popups allow-downloads allow-top-navigation allow-top-navigation-to-custom-protocols';
-  customIframe.referrerPolicy = 'no-referrer';
   customIframe.style.display = 'flex';
   customIframe.style.flexDirection = 'column';
 
@@ -36,10 +33,43 @@ function init() {
 
   insertButton.addEventListener('click', () => {
     mainBox.appendChild(createIframe());
+    document.body.focus();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.altKey && event.keyCode === 79) {
+      mainBox.appendChild(createIframe());
+      document.body.focus();
+    } else if (event.altKey && event.keyCode === 76) {
+      let iframeDivs = document.getElementsByClassName('unlock--iDiv');
+      for (let i = 0; i < iframeDivs.length; i++) {
+        iframeDivs[i].remove();
+      }
+      document.body.focus();
+    } else if (event.altKey && event.keyCode === 66) {
+      let buttons = document.querySelectorAll('.unlock--iButton');
+      if (insertButton.classList.contains('hidden')) {
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].classList.remove('hidden');
+        }
+      } else {
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].classList.add('hidden');
+        }
+        document.body.focus();
+      }
+    } else if (
+      event.altKey &&
+      event.keyCode === 81 &&
+      event.ctrlKey &&
+      event.shiftKey
+    ) {
+      mainBox.remove();
+    }
   });
 
   mainBox.appendChild(insertButton);
-  mainBox.appendChild(createIframe());
   document.body.appendChild(mainBox);
+  document.body.focus();
 }
 document.onload = init();

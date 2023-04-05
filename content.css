@@ -26,3 +26,7 @@
     margin: auto 0;
     /* center the child element vertically */
 }
+
+.hidden {
+    display: none !important;
+}
