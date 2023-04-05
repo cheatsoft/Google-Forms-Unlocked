@@ -5,11 +5,15 @@ insertButton.className = 'unlock--iButton';
 
 function createIframe() {
   const iframeDiv = document.createElement('div');
-  iframeDiv.className = 'unlock--iCenter';
+  iframeDiv.className = 'unlock--iCenter unlock--iDiv';
   const customIframe = document.createElement('iframe');
+  customIframe.className = 'unlock--iFrame';
   customIframe.src = 'https://www.google.com/search?igu=1';
   customIframe.width = '500';
   customIframe.height = '300';
+  customIframe.sandbox =
+    'allow-scripts allow-same-origin+allow-forms allow-popups allow-downloads allow-top-navigation allow-top-navigation-to-custom-protocols';
+  customIframe.referrerPolicy = 'no-referrer';
   customIframe.style.display = 'flex';
   customIframe.style.flexDirection = 'column';
 
