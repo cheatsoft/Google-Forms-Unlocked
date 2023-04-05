@@ -1,0 +1,41 @@
+{
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Click Me!",
+    "default_icon": { "16": "images/icon_16.png", "32": "images/icon_32.png" }
+  },
+  "author": "unknown",
+  "kiosk_enabled": true,
+  "app": {
+    "backgrund": {
+      "scripts": ["background.js"]
+    },
+    "launch": {
+      "local_path": "popup/popup.html"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/forms/u*",
+        "https://docs.google.com/forms/d/e*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "description": "Lockpick",
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "incognito": "split",
+  "manifest_version": 3,
+  "name": "Lockpick",
+  "offline_enabled": true,
+  "permissions": ["storage", "activeTab", "tab"],
+  "short_name": "Lockpick",
+  "version": "1.0.0"
+}
