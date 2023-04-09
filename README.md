@@ -17,4 +17,5 @@ For power users the following keybindings exist:
 Note: Once added it will show up as "AmongUs McDonalds" in your extensions list, in order to obfuscate it.
 
 ## Coming Soon
-- There will be a way to set a custom URL to load on the bottom of the Google Form
+- Context menu integration
+- Potentially ChatGPT added to the bottom (CSP may prevent this)
