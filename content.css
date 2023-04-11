@@ -27,6 +27,16 @@
     /* center the child element vertically */
 }
 
+.unlock--iDiv {
+    background-color: #cbe9ee;
+}
+
+.unlock--iFrame {
+    resize: both;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
 .hidden {
     display: none !important;
 }

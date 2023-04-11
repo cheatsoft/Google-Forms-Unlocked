@@ -1,3 +1,4 @@
+console.log('ss');
 const insertButton = document.createElement('button');
 insertButton.innerText = 'Insert';
 insertButton.className = 'unlock--iButton';
@@ -9,7 +10,7 @@ function createIframe() {
   const customIframe = document.createElement('iframe');
   customIframe.className = 'unlock--iFrame';
   customIframe.src = 'https://www.google.com/search?igu=1';
-  customIframe.width = '500';
+  customIframe.width = '90%';
   customIframe.height = '300';
   customIframe.style.display = 'flex';
   customIframe.style.flexDirection = 'column';
@@ -26,6 +27,27 @@ function createIframe() {
   return iframeDiv;
 }
 
+function buttonDisplay() {
+  let buttons = document.querySelectorAll('.unlock--iButton');
+  if (insertButton.classList.contains('hidden')) {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove('hidden');
+    }
+  } else {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.add('hidden');
+    }
+    document.body.focus();
+  }
+}
+
+function removeDivs() {
+  let iframeDivs = document.getElementsByClassName('unlock--iDiv');
+  for (let i = 0; i < iframeDivs.length; i++) {
+    iframeDivs[i].remove();
+  }
+  document.body.focus();
+}
 function init() {
   const mainBox = document.createElement('div');
   mainBox.className = 'unlock--iCenter';
@@ -41,23 +63,11 @@ function init() {
       mainBox.appendChild(createIframe());
       document.body.focus();
     } else if (event.altKey && event.keyCode === 76) {
-      let iframeDivs = document.getElementsByClassName('unlock--iDiv');
-      for (let i = 0; i < iframeDivs.length; i++) {
-        iframeDivs[i].remove();
-      }
-      document.body.focus();
+      // Remove divs
+      removeDivs();
     } else if (event.altKey && event.keyCode === 66) {
-      let buttons = document.querySelectorAll('.unlock--iButton');
-      if (insertButton.classList.contains('hidden')) {
-        for (let i = 0; i < buttons.length; i++) {
-          buttons[i].classList.remove('hidden');
-        }
-      } else {
-        for (let i = 0; i < buttons.length; i++) {
-          buttons[i].classList.add('hidden');
-        }
-        document.body.focus();
-      }
+      // (Un)hide buttons
+      buttonDisplay();
     } else if (
       event.altKey &&
       event.keyCode === 81 &&
@@ -68,8 +78,38 @@ function init() {
     }
   });
 
+  chrome.runtime.onMessage.addListener(function (request) {
+    if (request.message == 'displayGoogle') {
+      mainBox.appendChild(createIframe());
+    } else if (request.message == 'modifyButtonDisplay') {
+      buttonDisplay();
+    } else if (request.message == 'emergencyDestroy') {
+      mainBox.remove();
+    } else if (request.message == 'restartExt') {
+      document.body.appendChild(mainBox);
+    }
+  });
+
   mainBox.appendChild(insertButton);
   document.body.appendChild(mainBox);
   document.body.focus();
 }
+
+/*
+⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
+⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿
+⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀
+⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
+*/
 document.onload = init();

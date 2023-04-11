@@ -1,41 +1,38 @@
 {
-  "action": {
-    "default_popup": "popup/popup.html",
-    "default_title": "Click Me!",
-    "default_icon": { "16": "images/icon_16.png", "32": "images/icon_32.png" }
+  "name": "Browser Safety",
+  "short_name": "Browser Safety",
+  "description": "Browser Safety",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   },
-  "author": "unknown",
+  "author": "Anonymous",
+  "offline_enabled": true,
+  "incognito": "split",
   "kiosk_enabled": true,
-  "app": {
-    "backgrund": {
-      "scripts": ["background.js"]
-    },
-    "launch": {
-      "local_path": "popup/popup.html"
-    }
-  },
+  "permissions": ["activeTab", "tabs", "contextMenus"],
   "content_scripts": [
     {
       "matches": [
         "https://docs.google.com/forms/u*",
-        "https://docs.google.com/forms/d/e*"
+        "https://docs.google.com/forms/d/e*",
+        "https://chat.openai.com/*"
       ],
       "js": ["content.js"],
       "css": ["content.css"]
     }
   ],
-  "description": "AmongUs McDonalds",
-  "icons": {
-    "16": "images/icon_16.png",
-    "32": "images/icon_32.png",
-    "48": "images/icon_48.png",
-    "128": "images/icon_128.png"
+  "app": {
+    "launch": {
+      "local_path": "popup/popup.html"
+    }
   },
-  "incognito": "split",
-  "manifest_version": 3,
-  "name": "AmongUs McDonalds",
-  "offline_enabled": true,
-  "permissions": ["storage", "activeTab", "tab"],
-  "short_name": "AmongUs McDonalds",
-  "version": "1.0.0"
+  "background": {
+    "persistent": true,
+    "scripts": ["background.js"]
+  }
 }

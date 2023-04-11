@@ -18,4 +18,9 @@ Note: Once added it will show up as "AmongUs McDonalds" in your extensions list,
 
 ## Coming Soon
 - Context menu integration
-- Potentially ChatGPT added to the bottom (CSP may prevent this)
+
+## Notes
+- This extension uses Manifest Version 2, for which support will be dropped soon (Manifest Version 2 is only required for the Context Menu Integration)
+- Support for this type of current application (Legacy Packaged App) [will finish in 2025](https://blog.chromium.org/2021/10/extending-chrome-app-support-on-chrome.html)
+- Modern PWA solution is planned but dependent upon [`kiosk_enabled`](https://developer.chrome.com/docs/apps/manifest/kiosk_enabled/) [support for PWA's](https://www.chromium.org/chrome-apps/)
+- This app is not necessarily meant to be used in non-Kiosk mode (already unlocked) Google Forms, but can be used there too
