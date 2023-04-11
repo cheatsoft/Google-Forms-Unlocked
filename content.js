@@ -92,6 +92,8 @@ function init() {
 
   mainBox.appendChild(insertButton);
   document.body.appendChild(mainBox);
+  // Remove all event listeners on right click (because Google Forms blocks context menu's)
+  window.removeEventListener('contextmenu', null, true);
   document.body.focus();
 }
 
