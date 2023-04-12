@@ -1,4 +1,4 @@
-# Lockpick - Google Form Unlocker
+# Lockpick - Google Form Lockpicker
 
 This extension is designed to add Google (in an **iFrame**) to the bottom of a locked Google Form in locked mode.The primary goal is to overcome Google Forms Locked/Kiosk mode. It features keybindings for power users to open, close and hide parts of the extension as well as an emergency destroy function. For ease of access, a context-menu integration replicates the keybindings. 
 
